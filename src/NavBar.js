@@ -11,7 +11,7 @@ import "./NavBar.css";
 
 export default class NavBar extends Component {
     constructor(props) {
-        super(props)
+        super(props);
         this.state = {
             format: "hex",
             open: false
@@ -22,13 +22,13 @@ export default class NavBar extends Component {
             format: e.target.value,
             open: true
         });
-        this.props.handleChange(e.target.value)
-    }
+        this.props.handleChange(e.target.value);
+    };
     closeSnackbar = () => {
         this.setState({
             open: false
-        })
-    }
+        });
+    };
     render() {
         const { level, changeLevel } = this.props;
         const { format } = this.state;
@@ -71,6 +71,6 @@ export default class NavBar extends Component {
                     ]}
                 />
             </header>
-        )
+        );
     }
 }
