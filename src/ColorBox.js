@@ -1,24 +1,25 @@
 import React, { Component } from 'react';
 import "./ColorBox.css";
+import { Link } from "react-router-dom";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 
 
 
 export default class ColorBox extends Component {
     constructor(props) {
-        super(props)
+        super(props);
         this.state = {
             copied: false
-        }
+        };
 
     }
     changeCopyState = () => {
         this.setState({ copied: true }, () => {
             setTimeout(() => {
-                this.setState({ copied: false })
-            }, 1500)
+                this.setState({ copied: false });
+            }, 1500);
         });
-    }
+    };
     render() {
         const { background, name } = this.props;
         const { copied } = this.state;
@@ -36,10 +37,12 @@ export default class ColorBox extends Component {
                         </div>
                         <button className="copy-button">Copy</button>
                     </div>
-                    <span className="see-more">More</span>
+                    <Link to="/" onClick={e => e.stopPropagation()}>
+                        <span className="see-more">More</span>
+                    </Link>
                 </div>
             </CopyToClipboard>
-        )
+        );
     }
 }
 
