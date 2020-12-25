@@ -37,7 +37,13 @@ export default class Palette extends Component {
         return (
             <div>
                 <div className="Palette">
-                    <NavBar level={level} changeLevel={this.changeLevel} handleChange={this.changeFormat} />
+                    <NavBar
+                        level={level}
+                        changeLevel={this.changeLevel}
+                        handleChange={this.changeFormat}
+                        showingAllColors={true}
+
+                    />
                     {/* navbar goes here */}
                     <div className="Palette-colors">{colorBoxes}</div>
                     {/* footer goes here */}
