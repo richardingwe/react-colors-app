@@ -1,4 +1,4 @@
-.ColorBox {
+/* .ColorBox {
 	width: 20%;
 	height: 25%;
 	margin: 0 auto;
@@ -7,10 +7,10 @@
 	cursor: pointer;
 	text-transform: uppercase;
 	margin-bottom: -3.5px;
-}
+} */
 
-.copy-button,
-.back-button {
+/* .copy-button, */
+/* .back-button {
 	width: 100px;
 	height: 30px;
 	position: absolute;
@@ -29,18 +29,18 @@
 	border: none;
 	cursor: pointer;
 	text-decoration: none;
-}
+} */
 
-.copy-button {
+/* .copy-button {
 	opacity: 0;
-}
+} */
 
-.ColorBox:hover .copy-button {
+/* .ColorBox:hover .copy-button {
 	opacity: 1;
 	transition: 0.5s;
-}
+} */
 
-.box-content {
+/* .box-content {
 	position: absolute;
 	width: 100%;
 	left: 0px;
@@ -49,17 +49,17 @@
 	color: black;
 	letter-spacing: 1px;
 	font-size: 12px;
-}
+} */
 
-.light-text {
+/* .light-text {
 	color: white;
 }
 
 .ColorBox .dark-text {
 	color: black;
-}
+} */
 
-.see-more {
+/* .see-more {
 	background: rgba(255, 255, 255, 0.3);
 	position: absolute;
 	border: none;
@@ -75,29 +75,29 @@
 
 .SingleColorPalette .ColorBox {
 	height: 50%;
-}
+} */
 
-.ColorBox.go-back {
+/* .ColorBox.go-back {
 	background-color: black;
-}
+} */
 
-.copy-overlay {
+/* .copy-overlay {
 	opacity: 0;
 	z-index: 0;
 	width: 100%;
 	height: 100%;
 	transform: scale(0.1);
 	transition: transform 0.6s ease-in-out;
-}
+} */
 
-.copy-overlay.show {
+/* .copy-overlay.show {
 	opacity: 1;
 	z-index: 10;
 	transform: scale(50);
 	position: absolute;
-}
+} */
 
-.copy-message {
+/* .copy-message {
 	position: fixed;
 	left: 0;
 	top: 0;
@@ -111,27 +111,26 @@
 	transform: scale(0.1);
 	opacity: 0;
 	color: white;
-}
+} */
 
-.copy-message.show {
+/* .copy-message.show {
 	opacity: 1;
 	transform: scale(1);
 	z-index: 25;
 	transition: all 0.4s ease-in-out;
 	transition-delay: 0.3s;
-}
+} */
 
-.copy-message h1 {
+/* .copy-message h1 {
 	font-weight: 400;
-	/* text-shadow: 1px 2px black; */
 	background: rgba(255, 255, 255, 0.2);
 	width: 100%;
 	text-align: center;
 	padding: 1rem;
 	text-transform: uppercase;
-}
+} */
 
-.copy-message p {
+/* .copy-message p {
 	font-size: 2rem;
 	font-weight: 100;
-}
+} */
