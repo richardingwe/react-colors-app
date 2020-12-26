@@ -2,8 +2,34 @@ import React, { Component } from 'react';
 import ColorBox from "./ColorBox";
 import "./Palette.css";
 import NavBar from "./NavBar";
+import { withStyles } from "@material-ui/styles";
 
-export default class Palette extends Component {
+
+const styles = {
+    Palette: {
+        height: "100vh",
+        display: "flex",
+        flexDirection: "column"
+    },
+    colors: {
+        height: "90vh"
+    },
+    paletteFooter: {
+        height: "4vh",
+        backgroundColor: "white",
+        display: "flex",
+        justifyContent: "flex-end",
+        alignItems: "center",
+        fontWeight: "bold"
+    },
+    emoji: {
+        fontSize: "1.5rem",
+        marginRight: "1rem"
+    }
+};
+
+
+class Palette extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -23,6 +49,7 @@ export default class Palette extends Component {
     };
     render() {
         const { colors, paletteName, emoji, id } = this.props.palette;
+        const { classes } = this.props;
         const { level, format } = this.state;
         const colorBoxes = colors[level].map(color => (
             <ColorBox
@@ -36,7 +63,7 @@ export default class Palette extends Component {
         ));
         return (
             <div>
-                <div className="Palette">
+                <div className={classes.Palette}>
                     <NavBar
                         level={level}
                         changeLevel={this.changeLevel}
@@ -45,11 +72,11 @@ export default class Palette extends Component {
 
                     />
                     {/* navbar goes here */}
-                    <div className="Palette-colors">{colorBoxes}</div>
+                    <div className={classes.colors}>{colorBoxes}</div>
                     {/* footer goes here */}
-                    <footer className="Palette-footer">
+                    <footer className={classes.paletteFooter}>
                         {paletteName}
-                        <span className="emoji">
+                        <span className={classes.emoji}>
                             {emoji}
                         </span>
                     </footer>
@@ -58,3 +85,5 @@ export default class Palette extends Component {
         );
     }
 }
+
+export default withStyles(styles)(Palette);
