@@ -78,6 +78,10 @@ export default function NewPaletteForm() {
     const classes = useStyles();
     const theme = useTheme();
     const [open, setOpen] = useState(false);
+    const [currentColor, setCurrentColor] = useState("teal");
+    const [colors, setColors] = useState([
+        "purple", "pink"
+    ]);
 
     const handleDrawerOpen = () => {
         setOpen(true);
@@ -85,6 +89,14 @@ export default function NewPaletteForm() {
 
     const handleDrawerClose = () => {
         setOpen(false);
+    };
+
+    const updateCurrentColor = (newColor) => {
+        setCurrentColor(newColor.hex);
+    };
+
+    const addNewColor = () => {
+        setColors([...colors, currentColor]);
     };
 
     return (
@@ -126,15 +138,19 @@ export default function NewPaletteForm() {
                     </IconButton>
                 </div>
                 <Divider />
-                <Typography variant="h6">Design Your Palette</Typography>
+                <Typography
+                    variant="h6">
+                    Design Your Palette
+                    </Typography>
                 <div>
                     <Button variant="contained" color="secondary">Clear Palette</Button>
                     <Button variant="contained" color="primary">Random Color</Button>
                 </div>
                 <ChromePicker
-                    onChangeComplete={newColor => console.log(newColor)}
+                    color={currentColor}
+                    onChangeComplete={updateCurrentColor}
                 />
-                <Button variant="contained" color="primary">Add Color</Button>
+                <Button onClick={addNewColor} variant="contained" color="primary" style={{ backgroundColor: currentColor }} >Add Color</Button>
             </Drawer>
             <main
                 className={clsx(classes.content, {
@@ -142,18 +158,12 @@ export default function NewPaletteForm() {
                 })}
             >
                 <div className={classes.drawerHeader} />
+                <ul>
+                    {colors.map(color => (
+                        <li style={{ backgroundColor: color }}>{color}</li>
+                    ))}
+                </ul>
             </main>
         </div>
     );
 }
-// class NewPaletteForm extends Component {
-//     render() {
-//         return (
-//             <div>
-//                 <h1>NEW PALETTE FORM</h1>
-//             </div>
-//         );
-//     }
-// }
-
-// export default NewPaletteForm;
