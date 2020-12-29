@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 import clsx from 'clsx';
 import PaletteMetaForm from "./PaletteMetaForm";
@@ -25,6 +25,7 @@ const useStyles = makeStyles((theme) => ({
         }),
         flexDirection: "row",
         justifyContent: "space-between",
+        alignItems: "center",
         height: "64px"
     },
     appBarShift: {
@@ -39,13 +40,24 @@ const useStyles = makeStyles((theme) => ({
         marginRight: theme.spacing(2),
     },
     navBtns: {
-
+        marginRight: "1rem"
+    },
+    button: {
+        margin: "0 0.5rem"
+    },
+    link: {
+        textDecoration: "none"
     }
 }));
 
 export default function PaletteFormNav(props) {
     const classes = useStyles();
+    const [formShowing, setFormShowing] = useState(false);
     const { open, handleDrawerOpen, palettes, handleSubmit } = props;
+
+    const showForm = () => {
+        setFormShowing(true);
+    };
     return (
         <div className={classes.root}>
             <CssBaseline />
@@ -71,19 +83,27 @@ export default function PaletteFormNav(props) {
                     </Typography>
                 </Toolbar>
                 <div className={classes.navBtns}>
-
-                    <PaletteMetaForm
-                        palettes={palettes}
-                        handleSubmit={handleSubmit}
-                    />
-                    <Link to="/">
+                    <Link to="/" className={classes.link}>
                         <Button
                             variant="contained"
                             color="secondary"
+                            className={classes.button}
                         >Go Back</Button>
                     </Link>
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        className={classes.button}
+                        onClick={showForm}>
+                        Save Palette
+                    </Button>
                 </div>
             </AppBar>
+            {formShowing && <PaletteMetaForm
+                palettes={palettes}
+                handleSubmit={handleSubmit}
+            />
+            }
         </div>
     );
 }
