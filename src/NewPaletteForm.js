@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from "react-router-dom";
 import clsx from 'clsx';
+import PaletteFormNav from "./PaletteFormNav";
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -86,7 +88,7 @@ export default function NewPaletteForm(props) {
     const [newColorName, setNewColorName] = useState("");
     const [currentColor, setCurrentColor] = useState("teal");
     const [colors, setColors] = useState(props.palettes[0].colors);
-    const [newPaletteName, setNewPaletteName] = useState("");
+    // const [newPaletteName, setNewPaletteName] = useState("");
     const { maxColors } = props;
     const paletteFull = colors.length >= maxColors;
 
@@ -97,9 +99,7 @@ export default function NewPaletteForm(props) {
         ValidatorForm.addValidationRule("isColorUnique", (value) =>
             colors.every(({ color }) =>
                 color !== currentColor));
-        ValidatorForm.addValidationRule("isPaletteNameUnique", (value) =>
-            props.palettes.every(({ paletteName }) =>
-                paletteName.toLowerCase() !== value.toLowerCase()));
+
     });
 
     const handleDrawerOpen = () => {
@@ -128,15 +128,10 @@ export default function NewPaletteForm(props) {
         setNewColorName(evt.target.value);
     };
 
-    const handleChangePaletteName = (evt) => {
-        setNewPaletteName(evt.target.value);
-    };
-
-    const handleSubmit = () => {
-        let newName = newPaletteName;
+    const handleSubmit = (newPaletteName) => {
         const newPalette = {
-            paletteName: newName,
-            id: newName.toLowerCase().replace(/ /g, "-"),
+            paletteName: newPaletteName,
+            id: newPaletteName.toLowerCase().replace(/ /g, "-"),
             colors
         };
         props.savePalette(newPalette);
@@ -162,47 +157,13 @@ export default function NewPaletteForm(props) {
 
     return (
         <div className={classes.root}>
-            <CssBaseline />
-            <AppBar
-                position="fixed"
-                color="default"
-                className={clsx(classes.appBar, {
-                    [classes.appBarShift]: open,
-                })}
-            >
-                <Toolbar>
-                    <IconButton
-                        color="inherit"
-                        aria-label="open drawer"
-                        onClick={handleDrawerOpen}
-                        edge="start"
-                        className={clsx(classes.menuButton, open && classes.hide)}
-                    >
-                        <MenuIcon />
-                    </IconButton>
-                    <Typography variant="h6" noWrap>
-                        Persistent drawer
-                    </Typography>
-                    <ValidatorForm onSubmit={handleSubmit}>
-                        <TextValidator
-                            onChange={handleChangePaletteName}
-                            label="Palette Name"
-                            name="newPaletteName"
-                            value={newPaletteName}
-                            validators={["required", "isPaletteNameUnique"]}
-                            errorMessages={[
-                                "Enter Palette Name",
-                                "Name Already Taken"]}
-                        />
-                        <Button
-                            variant="contained"
-                            type="submit"
-                            color="primary">
-                            Save Palette
-                    </Button>
-                    </ValidatorForm>
-                </Toolbar>
-            </AppBar>
+            <PaletteFormNav
+                open={open}
+                classes={classes}
+                palettes={props.palettes}
+                handleSubmit={handleSubmit}
+                handleDrawerOpen={handleDrawerOpen}
+            />
             <Drawer
                 className={classes.drawer}
                 variant="persistent"
