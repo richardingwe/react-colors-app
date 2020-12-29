@@ -58,6 +58,9 @@ export default function PaletteFormNav(props) {
     const showForm = () => {
         setFormShowing(true);
     };
+    const hideForm = () => {
+        setFormShowing(false);
+    };
     return (
         <div className={classes.root}>
             <CssBaseline />
@@ -102,6 +105,7 @@ export default function PaletteFormNav(props) {
             {formShowing && <PaletteMetaForm
                 palettes={palettes}
                 handleSubmit={handleSubmit}
+                hideForm={hideForm}
             />
             }
         </div>
