@@ -78,14 +78,17 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
+
 export default function NewPaletteForm(props) {
     const classes = useStyles();
     const theme = useTheme();
-    const [open, setOpen] = useState(false);
+    const [open, setOpen] = useState(true);
     const [newColorName, setNewColorName] = useState("");
     const [currentColor, setCurrentColor] = useState("teal");
-    const [colors, setColors] = useState([]);
+    const [colors, setColors] = useState(props.palettes[0].colors);
     const [newPaletteName, setNewPaletteName] = useState("");
+    const { maxColors } = props;
+    const paletteFull = colors.length >= maxColors;
 
     useEffect(() => {
         ValidatorForm.addValidationRule("isColorNameUnique", (value) =>
@@ -117,6 +120,10 @@ export default function NewPaletteForm(props) {
         setNewColorName("");
     };
 
+    const clearColors = () => {
+        setColors([]);
+    };
+
     const handleChangeColor = (evt) => {
         setNewColorName(evt.target.value);
     };
@@ -142,8 +149,15 @@ export default function NewPaletteForm(props) {
 
     const onSortEnd = ({ oldIndex, newIndex }) => {
         setColors(() => (
-          arrayMove(colors, oldIndex, newIndex)
+            arrayMove(colors, oldIndex, newIndex)
         ));
+    };
+
+    const addRandomColor = () => {
+        const allColors = props.palettes.map(p => p.colors).flat();
+        let rand = Math.floor(Math.random() * allColors.length);
+        const randomColor = allColors[rand];
+        setColors([...colors, randomColor]);
     };
 
     return (
@@ -176,7 +190,9 @@ export default function NewPaletteForm(props) {
                             name="newPaletteName"
                             value={newPaletteName}
                             validators={["required", "isPaletteNameUnique"]}
-                            errorMessages={["Enter Palette Name", "Name Already Taken"]}
+                            errorMessages={[
+                                "Enter Palette Name",
+                                "Name Already Taken"]}
                         />
                         <Button
                             variant="contained"
@@ -207,8 +223,21 @@ export default function NewPaletteForm(props) {
                     Design Your Palette
                     </Typography>
                 <div>
-                    <Button variant="contained" color="secondary">Clear Palette</Button>
-                    <Button variant="contained" color="primary">Random Color</Button>
+                    <Button
+                        variant="contained"
+                        color="secondary"
+                        onClick={clearColors}
+                    >
+                        Clear Palette
+                    </Button>
+                    <Button
+                        variant="contained"
+                        disabled={paletteFull}
+                        color="primary"
+                        onClick={addRandomColor}
+                    >
+                        Random Color
+                    </Button>
                 </div>
                 <ChromePicker
                     color={currentColor}
@@ -220,9 +249,20 @@ export default function NewPaletteForm(props) {
                         name="newColorName"
                         onChange={handleChangeColor}
                         validators={["required", "isColorNameUnique", "isColorUnique"]}
-                        errorMessages={["this field is required", "color name must be unique", "color already used"]}
+                        errorMessages={[
+                            "Enter a color name",
+                            "color name must be unique",
+                            "color already used"]}
                     />
-                    <Button type="submit" variant="contained" color="primary" style={{ backgroundColor: currentColor }} >Add Color</Button>
+                    <Button
+                        type="submit"
+                        variant="contained"
+                        disabled={paletteFull}
+                        color="primary"
+                        style={{ backgroundColor: paletteFull ? "grey" : currentColor }}
+                    >
+                        {paletteFull ? "Palette full" : "Add Color"}
+                    </Button>
                 </ValidatorForm>
             </Drawer>
             <main
@@ -241,3 +281,6 @@ export default function NewPaletteForm(props) {
         </div>
     );
 }
+NewPaletteForm.defaultProps = {
+    maxColors: 20
+};
