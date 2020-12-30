@@ -1,6 +1,15 @@
 import sizes from "./sizes";
 import bg from "./bg.svg";
 export default {
+    "@global": {
+        ".fade-exit": {
+            opacity: 1
+        },
+        ".fade-exit-active": {
+            opacity: 0,
+            transition: "opacity 2s ease-out"
+        }
+    },
     root: {
         height: "100vh",
         display: "flex",
@@ -15,10 +24,7 @@ export default {
         display: "flex",
         alignItems: "flex-start",
         flexDirection: "column",
-        flexWrap: "wrap",
-        [sizes.down("md")]: {
-            // width: "100%"
-        }
+        flexWrap: "wrap"
     },
     heading: {
         fontSize: "2rem"
