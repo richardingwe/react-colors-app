@@ -13,13 +13,13 @@ export default {
         "&:hover button": {
             opacity: 1
         },
-        [sizes.down("lg")]: {
-            width: "25%",
-            height: props => props.showingFullPalette ? "20%" : "50%",
-        },
+        // [sizes.down("lg")]: {
+        //     width: "25%",
+        //     height: props => props.showingFullPalette ? "20%" : "50%",
+        // },
         [sizes.down("md")]: {
             width: "50%",
-            height: props => props.showingFullPalette ? "10%" : "50%",
+            height: props => props.showingFullPalette ? "10%" : "20%",
         },
         [sizes.down("xs")]: {
             width: "100%",
@@ -113,7 +113,10 @@ export default {
             width: "100%",
             textAlign: "center",
             padding: "1rem",
-            textTransform: "uppercase"
+            textTransform: "uppercase",
+            [sizes.down("xs")]: {
+                fontSize: "5rem"
+            }
         },
         "& p": {
             fontsize: "2rem",
