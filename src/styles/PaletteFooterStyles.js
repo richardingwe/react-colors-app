@@ -1,6 +1,6 @@
 export default {
     PaletteFooter: {
-        height: "4vh",
+        height: "5vh",
         backgroundColor: "white",
         display: "flex",
         justifyContent: "flex-end",
