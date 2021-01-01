@@ -12,6 +12,7 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import DraggableColorList from "./DraggableColorList";
 import arrayMove from "array-move";
+import seedColors from "./seedColors";
 import useStyles from "./styles/NewPaletteFormStyles";
 
 
@@ -20,7 +21,7 @@ export default function NewPaletteForm(props) {
     const classes = useStyles();
     const theme = useTheme();
     const [open, setOpen] = useState(true);
-    const [colors, setColors] = useState(props.palettes[0].colors);
+    const [colors, setColors] = useState(seedColors[0].colors);
     const { maxColors } = props;
     const paletteFull = colors.length >= maxColors;
 

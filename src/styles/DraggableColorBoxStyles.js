@@ -1,4 +1,5 @@
 import sizes from "./sizes";
+import chroma from "chroma-js";
 
 const styles = {
     root: {
@@ -29,7 +30,7 @@ const styles = {
         left: "0px",
         bottom: "0px",
         padding: "10px",
-        color: "black",
+        color: props => chroma(props.color).luminance() <= 0.08 ? "white" : "black",
         letterSpacing: "1px",
         fontSize: "12px",
         display: "flex",
