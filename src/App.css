@@ -2,9 +2,3 @@ body {
 	overflow-x: hidden;
 	/* background-color: blue; */
 }
-
-.page {
-	height: 100vh;
-	position: absolute;
-	width: 100%;
-}

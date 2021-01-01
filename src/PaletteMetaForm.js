@@ -29,6 +29,7 @@ export default function PaletteMetaForm(props) {
             emoji: emoji.native
         };
         props.handleSubmit(newPalette);
+        setStage("");
     };
 
     const showEmojiPicker = () => {
