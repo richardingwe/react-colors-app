@@ -21,7 +21,7 @@ function MiniPalette(props) {
         props.openDialog(props.id);
     };
     return (
-        <div className={classes.root} onClick={props.handleClick}>
+        <div className={classes.root} onClick={() => props.handleClick(props.id)}>
             <DeleteIcon onClick={deletePalette} className={classes.deleteIcon} />
             <div className={classes.colors}>
                 {/* mini color boxes */}
